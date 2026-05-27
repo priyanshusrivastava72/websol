@@ -18,7 +18,7 @@ function ProjectPanel({ proj, idx }) {
       className="project-panel absolute inset-0 w-full h-screen flex items-center justify-center overflow-hidden bg-bg"
       style={{
         zIndex: idx + 1,
-        clipPath: idx === 0 ? 'inset(0% 0% 0% 0%)' : 'inset(100% 0% 0% 0%)',
+        clipPath: idx === 0 ? 'inset(0% 0% 0% 0%)' : 'inset(100%np 0% 0% 0%)',
       }}
     >
       {/* Background Image */}

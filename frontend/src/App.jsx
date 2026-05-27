@@ -20,7 +20,7 @@ export default function App() {
       <Navbar />
 
       {/* Narrative Section Progression */}
-      <main className="relative z-10 w-full overflow-hidden">
+      <main className="relative z-10 w-full">
         <Hero />
         <About />
         <Services />

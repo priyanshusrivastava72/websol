@@ -145,7 +145,7 @@ html {
 body {
   background-color: var(--color-bg);
   color: var(--color-gray-900);
-  overflow-x: hidden;
+  overflow-x: clip;
   overscroll-behavior: none; /* Prevent iOS bounce fighting with Lenis */
   scrollbar-width: thin;
   scrollbar-color: var(--color-gray-500) var(--color-bg);
