@@ -1,0 +1,260 @@
+@import "tailwindcss";
+
+:root {
+  /* Dark mode variables (standard/defaults) */
+  --bg-color-val: #030308;
+  --bg-card-val: rgba(10, 10, 24, 0.55);
+  --bg-card-hover-val: rgba(18, 18, 38, 0.75);
+  --bg-glow-val: rgba(168, 85, 247, 0.03);
+  
+  --primary-val: #a855f7;
+  --primary-glow-val: rgba(168, 85, 247, 0.15);
+  --secondary-val: #3b82f6;
+  --secondary-glow-val: rgba(59, 130, 246, 0.15);
+  --accent-val: #06b6d4;
+  --accent-glow-val: rgba(6, 182, 212, 0.15);
+
+  /* Reversed gray scale (Dark mode text hierarchy) */
+  --gray-50-val: #030308;
+  --gray-100-val: #0f172a;
+  --gray-200-val: #1e293b;
+  --gray-300-val: #334155;
+  --gray-400-val: #475569;
+  --gray-500-val: #64748b;
+  --gray-600-val: #94a3b8;
+  --gray-700-val: #cbd5e1;
+  --gray-800-val: #e2e8f0;
+  --gray-900-val: #f1f5f9;
+  --gray-950-val: #f8fafc;
+
+  /* Translucent details */
+  --border-translucent: rgba(255, 255, 255, 0.05);
+  --border-translucent-heavy: rgba(255, 255, 255, 0.1);
+  --bg-translucent: rgba(255, 255, 255, 0.02);
+  --bg-translucent-heavy: rgba(255, 255, 255, 0.05);
+
+  /* About reveal animation text */
+  --reveal-text-val: #f1f5f9;
+
+  /* Grid overlay color */
+  --grid-gradient: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+
+  /* Gradient text helper */
+  --gradient-start-val: #ffffff;
+  --mouse-glow: rgba(255, 255, 255, 0.02);
+}
+
+.light {
+  /* Light mode variables */
+  --bg-color-val: #f9fafb;
+  --bg-card-val: rgba(255, 255, 255, 0.7);
+  --bg-card-hover-val: rgba(255, 255, 255, 0.95);
+  --bg-glow-val: rgba(124, 58, 237, 0.02);
+  
+  --primary-val: #7c3aed;
+  --primary-glow-val: rgba(124, 58, 237, 0.08);
+  --secondary-val: #2563eb;
+  --secondary-glow-val: rgba(37, 99, 235, 0.08);
+  --accent-val: #0891b2;
+  --accent-glow-val: rgba(8, 145, 178, 0.08);
+
+  /* Original gray scale (Light mode text hierarchy) */
+  --gray-50-val: #f9fafb;
+  --gray-100-val: #f3f4f6;
+  --gray-200-val: #e5e7eb;
+  --gray-300-val: #d1d5db;
+  --gray-400-val: #9ca3af;
+  --gray-500-val: #6b7280;
+  --gray-600-val: #4b5563;
+  --gray-700-val: #374151;
+  --gray-800-val: #1f2937;
+  --gray-900-val: #111827;
+  --gray-950-val: #030712;
+
+  /* Translucent details */
+  --border-translucent: rgba(0, 0, 0, 0.05);
+  --border-translucent-heavy: rgba(0, 0, 0, 0.1);
+  --bg-translucent: rgba(0, 0, 0, 0.02);
+  --bg-translucent-heavy: rgba(0, 0, 0, 0.05);
+
+  /* About reveal animation text */
+  --reveal-text-val: #0d0d0d;
+
+  /* Grid overlay color */
+  --grid-gradient: linear-gradient(to right, rgba(0, 0, 0, 0.02) 1px, transparent 1px), linear-gradient(to bottom, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
+
+  /* Gradient text helper */
+  --gradient-start-val: #111827;
+  --mouse-glow: rgba(0, 0, 0, 0.02);
+}
+
+@theme {
+  --color-bg: var(--bg-color-val);
+  --color-bg-card: var(--bg-card-val);
+  --color-bg-card-hover: var(--bg-card-hover-val);
+  --color-bg-glow: var(--bg-glow-val);
+  
+  --color-primary: var(--primary-val);
+  --color-primary-glow: var(--primary-glow-val);
+  --color-secondary: var(--secondary-val);
+  --color-secondary-glow: var(--secondary-glow-val);
+  --color-accent: var(--accent-val);
+  --color-accent-glow: var(--accent-glow-val);
+
+  /* Dynamic gray scale mapped to custom variables */
+  --color-gray-50: var(--gray-50-val);
+  --color-gray-100: var(--gray-100-val);
+  --color-gray-200: var(--gray-200-val);
+  --color-gray-300: var(--gray-300-val);
+  --color-gray-400: var(--gray-400-val);
+  --color-gray-500: var(--gray-500-val);
+  --color-gray-600: var(--gray-600-val);
+  --color-gray-700: var(--gray-700-val);
+  --color-gray-800: var(--gray-800-val);
+  --color-gray-900: var(--gray-900-val);
+  --color-gray-950: var(--gray-950-val);
+
+  /* Translucent details */
+  --color-glass-border: var(--border-translucent);
+  --color-glass-border-heavy: var(--border-translucent-heavy);
+  --color-glass-bg: var(--bg-translucent);
+  --color-glass-bg-heavy: var(--bg-translucent-heavy);
+
+  /* Dynamic reveal text color */
+  --color-reveal-text: var(--reveal-text-val);
+
+  --font-sans: 'Outfit', 'Inter', sans-serif;
+  --font-display: 'Outfit', sans-serif;
+
+  --animate-pulse-slow: pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-float-slow: float 6s ease-in-out infinite;
+  --animate-spin-slow: spin 15s linear infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+/* Custom Base Layer adjustments */
+html {
+  scroll-behavior: initial; /* Lenis handles smooth scrolling */
+  touch-action: pan-y;      /* Allow vertical touch scroll to reach Lenis */
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-gray-900);
+  overflow-x: hidden;
+  overscroll-behavior: none; /* Prevent iOS bounce fighting with Lenis */
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-gray-500) var(--color-bg);
+}
+
+/* Custom Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-gray-300);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+
+/* Hide default cursor on desktop when custom cursor is active */
+@media (pointer: fine) {
+  .custom-cursor-active,
+  .custom-cursor-active * {
+    cursor: none !important;
+  }
+}
+
+/* Tailwind v4 Utility Class Directives */
+@utility glass-panel {
+  background: var(--color-bg-card);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid var(--color-glass-border);
+}
+
+@utility glass-panel-light {
+  background: var(--color-glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-glass-border);
+}
+
+@utility glass-input {
+  background: var(--color-glass-bg);
+  border: 1px solid var(--color-glass-border-heavy);
+  color: var(--color-gray-900);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+
+  &:focus {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(168, 85, 247, 0.5);
+    box-shadow: 0 0 25px rgba(168, 85, 247, 0.15);
+    outline: none;
+  }
+}
+
+@utility text-gradient-purple-blue {
+  background: linear-gradient(135deg, var(--gradient-start-val) 15%, var(--primary-val) 70%, var(--secondary-val) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@utility text-gradient-cyan-blue {
+  background: linear-gradient(135deg, var(--accent-val) 0%, var(--secondary-val) 50%, var(--primary-val) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@utility glow-box-purple {
+  box-shadow: 0 0 50px rgba(168, 85, 247, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+}
+
+@utility glow-box-blue {
+  box-shadow: 0 0 50px rgba(59, 130, 246, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+}
+
+/* Film Grain Overlay */
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.025'/%3E%3C/svg%3E");
+}
+
+/* Custom styles for horizontal scroll sections */
+.horizontal-scroll-container {
+  display: flex;
+  flex-wrap: nowrap;
+  will-change: transform;
+}
+
+/* Three.js canvas absolute fill */
+.canvas-3d-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* GPU Hardware Acceleration hints for scroll animations */
+.about-word {
+  will-change: opacity;
+}
+
+.dashboard-card-gpu {
+  will-change: transform, opacity;
+}
+
+@utility grid-overlay {
+  background-image: var(--grid-gradient);
+}
