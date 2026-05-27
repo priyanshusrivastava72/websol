@@ -72,10 +72,18 @@ export default function Hero() {
     }
   };
 
+  const handleSkipIntro = (e) => {
+    e.preventDefault();
+    const contactSection = document.querySelector('#contact');
+    if (contactSection) {
+      window.lenis ? window.lenis.scrollTo(contactSection) : contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section 
       ref={containerRef} 
-      className="relative h-screen w-full flex items-center justify-center overflow-hidden px-6 md:px-12 py-24 select-none bg-bg"
+      className="relative h-screen w-full flex items-center justify-center overflow-hidden px-6 md:px-12 py-24 select-none"
     >
       {/* Cyber Viewfinder HUD corner brackets */}
       <span className="absolute left-6 top-6 w-3.5 h-3.5 border-l border-t border-glass-border-heavy pointer-events-none" />
@@ -187,7 +195,7 @@ export default function Hero() {
             </button>
             <button
               ref={button2Ref}
-              onClick={handleScrollNext}
+              onClick={handleSkipIntro}
               className="px-6 py-3 rounded-full border border-glass-border-heavy bg-glass-bg hover:bg-glass-bg-heavy text-gray-900 text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer font-mono"
             >
               Skip Intro
