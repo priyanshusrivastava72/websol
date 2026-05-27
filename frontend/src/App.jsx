@@ -1,6 +1,5 @@
 import SmoothScroll from './components/SmoothScroll';
 import GlowBackground from './components/GlowBackground';
-import Canvas3D from './components/Canvas3D';
 import Navbar from './components/Navbar';
 import Hero from './sections/Hero';
 import About from './sections/About';
@@ -16,7 +15,6 @@ export default function App() {
     <SmoothScroll>
       {/* Global Cinematic Environment */}
       <GlowBackground />
-      <Canvas3D />
       
       {/* Navigation Layout */}
       <Navbar />

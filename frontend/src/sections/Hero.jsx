@@ -72,6 +72,14 @@ export default function Hero() {
     }
   };
 
+  const handleSkipIntro = (e) => {
+    e.preventDefault();
+    const contactSection = document.querySelector('#contact');
+    if (contactSection) {
+      window.lenis ? window.lenis.scrollTo(contactSection) : contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section 
       ref={containerRef} 
@@ -187,7 +195,7 @@ export default function Hero() {
             </button>
             <button
               ref={button2Ref}
-              onClick={handleScrollNext}
+              onClick={handleSkipIntro}
               className="px-6 py-3 rounded-full border border-glass-border-heavy bg-glass-bg hover:bg-glass-bg-heavy text-gray-900 text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer font-mono"
             >
               Skip Intro
