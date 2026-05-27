@@ -18,12 +18,12 @@ function ProjectPanel({ proj, idx }) {
       className="project-panel absolute inset-0 w-full h-screen flex items-center justify-center overflow-hidden bg-bg"
       style={{
         zIndex: idx + 1,
-        clipPath: idx === 0 ? 'inset(0% 0% 0% 0%)' : 'inset(100%np 0% 0% 0%)',
+        clipPath: idx === 0 ? 'inset(0% 0% 0% 0%)' : 'inset(100% 0% 0% 0%)',
       }}
     >
       {/* Background Image */}
       <div
-        className="panel-bg absolute inset-0 w-full h-full bg-contain md:bg-cover bg-center bg-no-repeat opacity-80 md:opacity-100"
+        className="panel-bg absolute inset-0 w-full h-full bg-contain bg-center bg-no-repeat opacity-80 md:opacity-100"
         style={{
           backgroundImage: `url(${proj.img})`,
           transform: 'scale(1.0)',
