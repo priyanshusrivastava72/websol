@@ -15,7 +15,7 @@ function ProjectPanel({ proj, idx }) {
   const arrowRef = useMagnetic(0.3);
   return (
     <div
-      className="project-panel absolute inset-0 w-full h-screen flex items-center justify-center overflow-hidden"
+      className="project-panel absolute inset-0 w-full h-screen flex items-center justify-center overflow-hidden bg-bg"
       style={{
         zIndex: idx + 1,
         clipPath: idx === 0 ? 'inset(0% 0% 0% 0%)' : 'inset(100% 0% 0% 0%)',
@@ -23,10 +23,10 @@ function ProjectPanel({ proj, idx }) {
     >
       {/* Background Image */}
       <div
-        className="panel-bg absolute inset-0 w-full h-full bg-cover bg-center"
+        className="panel-bg absolute inset-0 w-full h-full bg-contain md:bg-cover bg-center bg-no-repeat opacity-80 md:opacity-100"
         style={{
           backgroundImage: `url(${proj.img})`,
-          transform: 'scale(1.1)',
+          transform: 'scale(1.0)',
         }}
       />
 
@@ -37,10 +37,10 @@ function ProjectPanel({ proj, idx }) {
       <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:6rem_6rem]" />
 
       {/* Viewfinder ticks on fullscreen image */}
-      <span className="absolute left-6 top-6 w-3.5 h-3.5 border-l border-t border-white/20 pointer-events-none" />
-      <span className="absolute right-6 top-6 w-3.5 h-3.5 border-r border-t border-white/20 pointer-events-none" />
-      <span className="absolute left-6 bottom-6 w-3.5 h-3.5 border-l border-b border-white/20 pointer-events-none" />
-      <span className="absolute right-6 bottom-6 w-3.5 h-3.5 border-r border-b border-white/20 pointer-events-none" />
+      <span className="absolute left-4 md:left-8 top-4 md:top-8 w-8 h-8 border-l-2 border-t-2 border-white/60 pointer-events-none" />
+      <span className="absolute right-4 md:right-8 top-4 md:top-8 w-8 h-8 border-r-2 border-t-2 border-white/60 pointer-events-none" />
+      <span className="absolute left-4 md:left-8 bottom-4 md:bottom-8 w-8 h-8 border-l-2 border-b-2 border-white/60 pointer-events-none" />
+      <span className="absolute right-4 md:right-8 bottom-4 md:bottom-8 w-8 h-8 border-r-2 border-b-2 border-white/60 pointer-events-none" />
 
       {/* Vertical Tech HUD labels */}
       <div className="absolute top-1/2 left-8 -translate-y-1/2 font-mono text-[8px] text-white/30 text-left hidden lg:block space-y-3 pointer-events-none">
@@ -125,8 +125,8 @@ export default function Projects() {
       link: 'https://startupcafe.co.in',
     },
     {
-      title: 'Arun Gupta',
-      client: 'Arun Gupta',
+      title: 'Arunn Guptaa',
+      client: 'Arunn Guptaa',
       category: 'Business Coaching',
       year: '2026',
       img: proj3Img,

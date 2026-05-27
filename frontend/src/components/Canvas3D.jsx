@@ -1,5 +1,4 @@
 import { Canvas, useFrame } from '@react-three/fiber';
-import { TorusKnot } from '@react-three/drei';
 import { useRef, useMemo, useEffect, useState } from 'react';
 import * as THREE from 'three';
 
@@ -102,61 +101,101 @@ function ParticleWaves({ theme }) {
   );
 }
 
-function CoreGeometry({ theme }) {
+function CoreGeometry({ theme, isMobile }) {
   const meshRef = useRef(null);
+  const coreRef = useRef(null);
+  const ring2Ref = useRef(null);
+  const ring3Ref = useRef(null);
   const mouse = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
     const handleMouseMove = (e) => {
+      if (isMobile) return;
       mouse.current.x = (e.clientX / window.innerWidth) * 2 - 1;
       mouse.current.y = -(e.clientY / window.innerHeight) * 2 + 1;
     };
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+  }, [isMobile]);
 
   useFrame((state) => {
     if (!meshRef.current) return;
-    
     const time = state.clock.getElapsedTime();
     const scrollFactor = window.scrollY * 0.0015;
 
-    const targetX = mouse.current.x * 2.0;
-    const targetY = mouse.current.y * 1.2;
+    const targetX = isMobile ? 0 : mouse.current.x * 2.0;
+    const targetY = isMobile ? 0 : mouse.current.y * 1.2;
     meshRef.current.position.x += (targetX - meshRef.current.position.x) * 0.05;
     meshRef.current.position.y += (targetY - meshRef.current.position.y) * 0.05;
 
-    meshRef.current.rotation.x = time * 0.15 + scrollFactor * 0.25;
-    meshRef.current.rotation.y = time * 0.25 + scrollFactor * 0.15;
+    meshRef.current.rotation.y = time * 0.05;
+
+    if (coreRef.current) {
+      coreRef.current.rotation.x = time * 0.15 + scrollFactor * 0.25;
+      coreRef.current.rotation.y = time * 0.25 + scrollFactor * 0.15;
+    }
+
+    if (ring2Ref.current) {
+      ring2Ref.current.rotation.y = -time * 0.1 + scrollFactor * 0.15;
+      ring2Ref.current.rotation.z = time * 0.08;
+    }
+    if (ring3Ref.current) {
+      ring3Ref.current.rotation.z = time * 0.12 - scrollFactor * 0.1;
+      ring3Ref.current.rotation.x = -time * 0.08;
+    }
     
-    const pulse = 1.3 + Math.sin(time * 1.2) * 0.06 + Math.sin(scrollFactor) * 0.3;
+    const pulse = 1.6 + Math.sin(time * 1.2) * 0.06 + Math.sin(scrollFactor) * 0.3;
     meshRef.current.scale.set(pulse, pulse, pulse);
   });
 
   const accentColor = theme === 'light' ? '#0891b2' : '#06b6d4';
-  const secondaryColor = theme === 'light' ? '#2563eb' : '#3b82f6';
+  const primaryColor = theme === 'light' ? '#7c3aed' : '#a855f7';
 
   return (
     <group ref={meshRef}>
-      {/* Optimized Torus knot (reduced segments from 120/16 to 60/10 to cut poly count) */}
-      <TorusKnot args={[1, 0.35, 60, 10]} position={[0, 0, 0]}>
+      {/* 3D Geodesic Network Node Core */}
+      <group ref={coreRef}>
+        <mesh>
+          <icosahedronGeometry args={[0.9, 1]} />
+          <meshBasicMaterial
+            color={primaryColor}
+            wireframe={true}
+            transparent={true}
+            opacity={0.3}
+          />
+        </mesh>
+        <points>
+          <icosahedronGeometry args={[0.9, 1]} />
+          <pointsMaterial
+            color={accentColor}
+            size={0.05}
+            sizeAttenuation={true}
+            transparent={true}
+            opacity={0.5}
+          />
+        </points>
+      </group>
+
+
+      <mesh ref={ring2Ref} rotation={[1.0, -0.5, 0.5]}>
+        <torusGeometry args={[1.5, 0.012, 8, 64]} />
         <meshBasicMaterial
           color={accentColor}
+          transparent={true}
+          opacity={0.3}
           wireframe={true}
-          transparent={true}
-          opacity={0.18}
         />
-      </TorusKnot>
+      </mesh>
 
-      <TorusKnot args={[1, 0.35, 60, 10]}>
-        <pointsMaterial
-          color={secondaryColor}
-          size={0.04}
-          sizeAttenuation={true}
+      <mesh ref={ring3Ref} rotation={[-0.5, 1.0, -0.2]}>
+        <torusGeometry args={[1.1, 0.01, 8, 64]} />
+        <meshBasicMaterial
+          color={primaryColor}
           transparent={true}
-          opacity={0.4}
+          opacity={0.3}
+          wireframe={true}
         />
-      </TorusKnot>
+      </mesh>
     </group>
   );
 }
@@ -166,11 +205,8 @@ export default function Canvas3D() {
   const [theme, setTheme] = useState('dark');
 
   useEffect(() => {
-    // Check initial media status
     const media = window.matchMedia('(max-width: 767px)');
     setIsMobile(media.matches);
-
-    // Dynamic listener for window resizes
     const listener = (e) => setIsMobile(e.matches);
     media.addEventListener('change', listener);
     return () => media.removeEventListener('change', listener);
@@ -182,29 +218,28 @@ export default function Canvas3D() {
       setTheme(isLight ? 'light' : 'dark');
     };
     checkTheme();
-
     const observer = new MutationObserver(checkTheme);
     observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
     return () => observer.disconnect();
   }, []);
 
-  if (isMobile) return null;
-
   const accentColor = theme === 'light' ? '#0891b2' : '#06b6d4';
   const primaryColor = theme === 'light' ? '#7c3aed' : '#a855f7';
 
   return (
-    <div className="canvas-3d-container opacity-45">
+    <div className="canvas-3d-container opacity-100 pointer-events-none">
       <Canvas
         camera={{ position: [0, 0, 7], fov: 45 }}
         gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
+        events={null}
+        style={{ pointerEvents: 'none' }}
       >
         <ambientLight intensity={0.6} />
         <pointLight position={[5, 10, 5]} intensity={1.2} color={accentColor} />
         <pointLight position={[-5, -10, 5]} intensity={1.2} color={primaryColor} />
         
         <ParticleWaves theme={theme} />
-        <CoreGeometry theme={theme} />
+        <CoreGeometry theme={theme} isMobile={isMobile} />
       </Canvas>
     </div>
   );

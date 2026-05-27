@@ -83,7 +83,7 @@ export default function Hero() {
   return (
     <section 
       ref={containerRef} 
-      className="relative h-screen w-full flex items-center justify-center overflow-hidden px-6 md:px-12 py-24 select-none bg-bg"
+      className="relative h-screen w-full flex items-center justify-center overflow-hidden px-6 md:px-12 py-24 select-none"
     >
       {/* Cyber Viewfinder HUD corner brackets */}
       <span className="absolute left-6 top-6 w-3.5 h-3.5 border-l border-t border-glass-border-heavy pointer-events-none" />
