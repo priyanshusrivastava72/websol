@@ -3,6 +3,33 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Code, Cpu, Sparkles, TrendingUp, ArrowRight } from 'lucide-react';
 
+import webSolutionsGraphic from '../assets/web_solutions_graphic.png';
+import aiAutomationGraphic from '../assets/ai_automation_graphic.png';
+import brandingDesignGraphic from '../assets/branding_design_graphic.png';
+import digitalGrowthGraphic from '../assets/digital_growth_graphic.png';
+
+// Internal Background Graphics Component
+function CardGraphic({ index }) {
+  const images = [
+    webSolutionsGraphic,
+    aiAutomationGraphic,
+    brandingDesignGraphic,
+    digitalGrowthGraphic
+  ];
+  
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+      <img 
+        src={images[index]} 
+        alt="" 
+        className="absolute inset-0 w-full h-full object-cover opacity-[0.15] mix-blend-lighten scale-110 group-hover:scale-105 group-hover:opacity-[0.35] transition-all duration-1000 ease-out"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/20 to-transparent opacity-80" />
+      <div className="absolute inset-0 bg-gradient-to-b from-bg/40 to-transparent" />
+    </div>
+  );
+}
+
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Services() {
@@ -166,23 +193,26 @@ export default function Services() {
                 }}
               >
                 {/* HUD Corner Ticks */}
-                <span className="absolute left-3.5 top-3.5 font-mono text-[8px] text-gray-400 pointer-events-none">+</span>
-                <span className="absolute right-3.5 top-3.5 font-mono text-[8px] text-gray-400 pointer-events-none">+</span>
-                <span className="absolute left-3.5 bottom-3.5 font-mono text-[8px] text-gray-400 pointer-events-none">+</span>
-                <span className="absolute right-3.5 bottom-3.5 font-mono text-[8px] text-gray-400 pointer-events-none">+</span>
+                <span className="absolute left-3.5 top-3.5 font-mono text-[8px] text-gray-400 pointer-events-none z-10">+</span>
+                <span className="absolute right-3.5 top-3.5 font-mono text-[8px] text-gray-400 pointer-events-none z-10">+</span>
+                <span className="absolute left-3.5 bottom-3.5 font-mono text-[8px] text-gray-400 pointer-events-none z-10">+</span>
+                <span className="absolute right-3.5 bottom-3.5 font-mono text-[8px] text-gray-400 pointer-events-none z-10">+</span>
 
                 {/* Magnetic Hover Glow */}
                 <div 
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-0"
                   style={{
                     background: 'radial-gradient(circle 350px at var(--mouse-x, 0px) var(--mouse-y, 0px), var(--mouse-glow), transparent 80%)'
                   }}
                 />
 
-                <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${cat.color} blur-3xl rounded-full opacity-50`} />
+                <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${cat.color} blur-3xl rounded-full opacity-50 z-0`} />
+
+                {/* Internal Graphics Layer */}
+                <CardGraphic index={idx} />
 
                 {/* Top Section */}
-                <div className="flex justify-between items-start">
+                <div className="flex justify-between items-start relative z-10">
                   <div className="space-y-1.5 text-left">
                     <span className="text-[9px] font-black tracking-widest text-accent block font-mono">
                       {cat.tagline}
@@ -197,12 +227,12 @@ export default function Services() {
                 </div>
 
                 {/* Middle Description */}
-                <p className="text-gray-600 text-xs sm:text-sm md:text-base font-light leading-relaxed max-w-xl my-4 md:my-6 text-left">
+                <p className="text-gray-600 text-xs sm:text-sm md:text-base font-light leading-relaxed max-w-xl my-4 md:my-6 text-left relative z-10">
                   {cat.desc}
                 </p>
 
                 {/* Bottom Core Features badges & icon */}
-                <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 md:gap-6 border-t border-glass-border pt-4 md:pt-8">
+                <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 md:gap-6 border-t border-glass-border pt-4 md:pt-8 relative z-10">
                   <div className="flex flex-wrap gap-2">
                     {cat.features.map((feat, fidx) => (
                       <span

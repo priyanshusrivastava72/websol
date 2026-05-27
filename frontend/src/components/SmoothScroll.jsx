@@ -13,9 +13,9 @@ export default function SmoothScroll({ children }) {
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
-      smoothTouch: true,       // Enable smooth scroll on touch/mobile
+      smoothTouch: false,      // Disabled because hijacking native touch scroll makes it feel janky
       syncTouch: false,        // Disable syncTouch to allow momentum/inertia
-      touchMultiplier: 2.0,    // Increased for better swipe response
+      touchMultiplier: 1.0,    // Reset to default
       infinite: false,
     });
 
