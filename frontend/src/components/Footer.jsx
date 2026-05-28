@@ -85,7 +85,7 @@ export default function Footer() {
           <ul className="space-y-4 text-sm text-gray-600 font-light">
             <li className="flex items-center gap-3">
               <MapPin size={16} className="text-primary" />
-              <span>Vardha Group, Gorakhpur, Uttar Pradesh - 273007</span>
+              <span>Vardha Group, Gorakhnath Temple Road, Gorakhpur, Uttar Pradesh - 273007</span>
             </li>
             <li className="flex items-center gap-3">
               <Mail size={16} className="text-accent" />
