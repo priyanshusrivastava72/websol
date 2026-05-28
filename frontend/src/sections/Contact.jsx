@@ -7,6 +7,8 @@ export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
+    business: '',
     message: '',
   });
 
@@ -44,17 +46,28 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.name || !formData.email || !formData.message) {
+    if (!formData.name || !formData.email || !formData.phone || !formData.business || !formData.message) {
       setStatus('error');
       setMsg('Please fill out all required fields.');
+      return;
+    }
+
+    const phoneRegex = /^\+?[\d\s-]{10,15}$/;
+    if (!phoneRegex.test(formData.phone)) {
+      setStatus('error');
+      setMsg('Please enter a valid phone number format (e.g. +91 9876543210).');
       return;
     }
 
     setStatus('loading');
 
     const submitData = {
-      ...formData,
-      services: selectedServices,
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      business: formData.business,
+      message: formData.message,
+      capabilities: selectedServices,
     };
 
     try {
@@ -72,6 +85,8 @@ export default function Contact() {
         setFormData({
           name: '',
           email: '',
+          phone: '',
+          business: '',
           message: '',
         });
         setSelectedServices([]);
@@ -161,6 +176,30 @@ export default function Contact() {
                     value={formData.email}
                     onChange={handleInputChange}
                     placeholder="jane@example.com"
+                    className="w-full px-5 py-3 rounded-2xl glass-input text-sm text-gray-900 font-mono"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[9px] uppercase font-black tracking-wider text-gray-500 font-mono">// PHONE_NUMBER *</label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    required
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    placeholder="+91 9876543210"
+                    className="w-full px-5 py-3 rounded-2xl glass-input text-sm text-gray-900 font-mono"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-[9px] uppercase font-black tracking-wider text-gray-500 font-mono">// BUSINESS_NAME *</label>
+                  <input
+                    type="text"
+                    name="business"
+                    required
+                    value={formData.business}
+                    onChange={handleInputChange}
+                    placeholder="WebSol Agency"
                     className="w-full px-5 py-3 rounded-2xl glass-input text-sm text-gray-900 font-mono"
                   />
                 </div>

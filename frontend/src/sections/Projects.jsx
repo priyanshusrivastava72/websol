@@ -23,7 +23,7 @@ function ProjectPanel({ proj, idx }) {
     >
       {/* Background Image */}
       <div
-        className="panel-bg absolute inset-0 w-full h-full bg-contain bg-center bg-no-repeat opacity-80 md:opacity-100"
+        className="panel-bg absolute top-[10%] left-[10%] w-[80%] h-[80%] bg-contain bg-center bg-no-repeat opacity-80 md:opacity-100"
         style={{
           backgroundImage: `url(${proj.img})`,
           transform: 'scale(1.0)',
@@ -221,4 +221,3 @@ export default function Projects() {
     </div>
   );
 }
-

@@ -59,7 +59,7 @@ export default function Navbar() {
   const handleNavClick = (e, href) => {
     e.preventDefault();
     setMobileMenuOpen(false);
-    
+
     const targetElement = document.querySelector(href);
     if (targetElement) {
       if (window.lenis) {
@@ -76,15 +76,13 @@ export default function Navbar() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 px-6 md:px-12 py-4 ${
-          scrolled ? 'pt-4' : 'pt-6'
-        }`}
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 px-6 md:px-12 py-4 ${scrolled ? 'pt-4' : 'pt-6'
+          }`}
       >
-        <div className={`max-w-7xl mx-auto flex items-center justify-between px-6 py-3 rounded-full transition-all duration-500 ${
-          scrolled 
-            ? 'glass-panel shadow-[0_10px_30px_rgba(0,0,0,0.06)] backdrop-blur-md' 
+        <div className={`max-w-7xl mx-auto flex items-center justify-between px-6 py-3 rounded-full transition-all duration-500 ${scrolled
+            ? 'glass-panel shadow-[0_10px_30px_rgba(0,0,0,0.06)] backdrop-blur-md'
             : 'border-b border-transparent bg-transparent'
-        }`}>
+          }`}>
           {/* Logo & Connection Node */}
           <div className="flex items-center gap-6">
             <a href="#" className="flex items-center gap-2 group">
