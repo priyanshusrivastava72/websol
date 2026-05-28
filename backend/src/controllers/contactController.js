@@ -1,5 +1,5 @@
 import Contact from '../models/Contact.js';
-import { sendLeadNotification } from '../services/emailService.js';
+import { sendLeadNotification, sendAutoReplyEmail } from '../services/emailService.js';
 
 // @desc    Submit a new contact form
 // @route   POST /api/contact
@@ -26,13 +26,20 @@ export const submitContactForm = async (req, res) => {
       capabilities: capabilities || [],
     });
 
-    // Trigger Email Notification (Non-blocking / safe)
+    // Trigger Admin Email Notification (Non-blocking / safe)
     sendLeadNotification({
       name,
       email,
       phone,
       business,
       message,
+      capabilities: capabilities || [],
+    });
+
+    // Trigger Customer Auto Reply Email (Non-blocking / safe)
+    sendAutoReplyEmail({
+      name,
+      email,
       capabilities: capabilities || [],
     });
 

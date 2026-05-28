@@ -13,7 +13,12 @@ connectDB();
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL || 'http://localhost:5173', // Fallback for local dev
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 // Routes
@@ -21,6 +26,15 @@ app.use('/api/contact', contactRoutes);
 
 app.get('/', (req, res) => {
   res.send('Backend Running');
+});
+
+// Global Error Handler
+app.use((err, req, res, next) => {
+  console.error(`❌ Global Error: ${err.message}`);
+  res.status(500).json({
+    success: false,
+    message: 'Internal Server Error',
+  });
 });
 
 // Start server
