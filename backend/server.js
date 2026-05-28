@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 import apiRoutes from './routes/api.js';
+import contactRoutes from './src/routes/contactRoutes.js';
 
 // Load config
 dotenv.config();
@@ -17,7 +18,8 @@ app.use(cors());
 app.use(express.json());
 
 // API Routes
-app.use('/api', apiRoutes);
+app.use('/api', apiRoutes); // This will still handle /api/newsletter
+app.use('/api/contact', contactRoutes); // This handles new contact with Resend
 
 // Health check endpoint
 app.get('/health', (req, res) => {
