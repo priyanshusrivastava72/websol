@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, CheckCircle, AlertTriangle, Send } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { API_BASE_URL } from '../config/api';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -71,7 +72,7 @@ export default function Contact() {
     };
 
     try {
-      const response = await fetch('http://localhost:5000/api/contact', {
+      const response = await fetch(`${API_BASE_URL}/api/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(submitData),
